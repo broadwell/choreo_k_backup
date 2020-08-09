@@ -614,14 +614,14 @@ def interpolate_missing_coords(input_frames, threshold=.5, figure_type='figures'
         try_extrapolated_position = False
         for p in range(i-1, max(-1,i-frame_search_limit-1), -1):
           # Figures can appear and disappear from frame to frame
-          if figure_type in input_frames[p] and input_frames[p][figure_type][f].data.shape[0] != 0 and input_frames[p][figure_type][f].data[j][2] > coord[2]:
+          if figure_type in input_frames[p] and f < len(input_frames[p][figure_type]) and input_frames[p][figure_type][f].data.shape[0] != 0 and input_frames[p][figure_type][f].data[j][2] > coord[2]:
             previous_coord = input_frames[p][figure_type][f].data[j]
             #print("FOUND PREVIOUS COORD AT FRAME",p,previous_coord)
             previous_bbox = get_bbox(input_frames[p][figure_type][f].data)
             break
         for n in range(i, min(i+frame_search_limit+1, len(input_frames))):
           # Figures can appear and disappear from frame to frame
-          if figure_type in input_frames[n] and input_frames[n][figure_type][f].data.shape[0] != 0 and input_frames[n][figure_type][f].data[j][2] > coord[2]:
+          if figure_type in input_frames[n] and f < len(input_frames[n][figure_type]) and input_frames[n][figure_type][f].data.shape[0] != 0 and input_frames[n][figure_type][f].data[j][2] > coord[2]:
             next_coord = input_frames[n][figure_type][f].data[j]
             #print("FOUND NEXT COORD AT FRAME",n,next_coord)
             next_bbox = get_bbox(input_frames[n][figure_type][f].data)
